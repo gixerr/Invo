@@ -1,8 +1,46 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F916B098-E6D7-49C3-BEBF-AA44D0615783}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7EEB1899-51E8-42D3-856C-A1D48A03796C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bootstrapper", "Bootstrapper", "{1AE52E32-7FA7-4A1A-862C-CD94884DBDC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{B7803983-66E9-43E5-88D1-9700DF6403DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{7AF3637A-6159-4FBC-AEFD-FD4631FB96B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invo.Shared.Abstractions", "src\Shared\Invo.Shared.Abstractions\Invo.Shared.Abstractions.csproj", "{ACB948A9-97FD-469D-AD2C-EAE2E2CF23A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invo.Shared.Infrastructure", "src\Shared\Invo.Shared.Infrastructure\Invo.Shared.Infrastructure.csproj", "{A0B914B9-4DA6-481E-A0EC-C950694CB30A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invo.Bootstrapper", "src\Bootstrapper\Invo.Bootstrapper\Invo.Bootstrapper.csproj", "{E893BCA5-7B2E-438D-AC06-B7C7EE14C386}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACB948A9-97FD-469D-AD2C-EAE2E2CF23A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACB948A9-97FD-469D-AD2C-EAE2E2CF23A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACB948A9-97FD-469D-AD2C-EAE2E2CF23A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACB948A9-97FD-469D-AD2C-EAE2E2CF23A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0B914B9-4DA6-481E-A0EC-C950694CB30A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0B914B9-4DA6-481E-A0EC-C950694CB30A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0B914B9-4DA6-481E-A0EC-C950694CB30A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0B914B9-4DA6-481E-A0EC-C950694CB30A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E893BCA5-7B2E-438D-AC06-B7C7EE14C386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E893BCA5-7B2E-438D-AC06-B7C7EE14C386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E893BCA5-7B2E-438D-AC06-B7C7EE14C386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E893BCA5-7B2E-438D-AC06-B7C7EE14C386}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1AE52E32-7FA7-4A1A-862C-CD94884DBDC2} = {F916B098-E6D7-49C3-BEBF-AA44D0615783}
+		{B7803983-66E9-43E5-88D1-9700DF6403DE} = {F916B098-E6D7-49C3-BEBF-AA44D0615783}
+		{7AF3637A-6159-4FBC-AEFD-FD4631FB96B2} = {F916B098-E6D7-49C3-BEBF-AA44D0615783}
+		{ACB948A9-97FD-469D-AD2C-EAE2E2CF23A9} = {7AF3637A-6159-4FBC-AEFD-FD4631FB96B2}
+		{A0B914B9-4DA6-481E-A0EC-C950694CB30A} = {7AF3637A-6159-4FBC-AEFD-FD4631FB96B2}
+		{E893BCA5-7B2E-438D-AC06-B7C7EE14C386} = {1AE52E32-7FA7-4A1A-862C-CD94884DBDC2}
 	EndGlobalSection
 EndGlobal

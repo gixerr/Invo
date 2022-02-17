@@ -120,12 +120,12 @@ namespace Invo.Modules.Invoices.Core.Services
                     Name = x.Name,
                     Unit = x.Unit,
                     Amount = x.Amount,
-                    NetPrice = GetRoundedAmount(x.NetPrice),
+                    NetPrice = GetRoundedAmount(ToPln(x.NetPrice, x.Currency, x.ExchangeRate)),
                     VatRate = x.VatRate,
-                    GrossPrice = GetRoundedAmount(_grossNetCalculationService.GetGrossPrice(x.NetPrice, x.VatRate)),
-                    NetAmount = GetRoundedAmount(_grossNetCalculationService.GetNetAmount(x.NetPrice, x.Amount)),
-                    VatAmount = GetRoundedAmount(_grossNetCalculationService.GetSummarisedVatAmount(x.NetPrice, x.VatRate, x.Amount)),
-                    GrossAmount = GetRoundedAmount(_grossNetCalculationService.GetGrossAmount(x.NetPrice, x.VatRate, x.Amount)),
+                    GrossPrice = GetRoundedAmount(_grossNetCalculationService.GetGrossPrice(ToPln(x.NetPrice, x.Currency, x.ExchangeRate), x.VatRate)),
+                    NetAmount = GetRoundedAmount(_grossNetCalculationService.GetNetAmount(ToPln(x.NetPrice, x.Currency, x.ExchangeRate), x.Amount)),
+                    VatAmount = GetRoundedAmount(_grossNetCalculationService.GetSummarisedVatAmount(ToPln(x.NetPrice, x.Currency, x.ExchangeRate), x.VatRate, x.Amount)),
+                    GrossAmount = GetRoundedAmount(_grossNetCalculationService.GetGrossAmount(ToPln(x.NetPrice, x.Currency, x.ExchangeRate), x.VatRate, x.Amount)),
                 })
             };
             invoice.VatAmount = GetRoundedAmount(invoice.Items.Sum(x => x.VatAmount));
@@ -137,5 +137,12 @@ namespace Invo.Modules.Invoices.Core.Services
 
         private static decimal GetRoundedAmount(decimal amount)
             => Math.Round(amount, 2);
+
+        private static decimal ToPln(decimal amount, string currency, decimal exchangeRate)
+        {
+            if (currency.Equals("pln", StringComparison.OrdinalIgnoreCase)) return amount;
+
+            return amount * exchangeRate;
+        }
     }
 }

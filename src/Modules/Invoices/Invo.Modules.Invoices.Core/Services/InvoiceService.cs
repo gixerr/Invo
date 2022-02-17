@@ -4,33 +4,37 @@ using System.Linq;
 using System.Threading.Tasks;
 using Invo.Modules.Invoices.Core.DTO;
 using Invo.Modules.Invoices.Core.Entities;
+using Invo.Modules.Invoices.Core.Exceptions;
 using Invo.Modules.Invoices.Core.Repositories;
+using Invo.Shared.Infrastructure.Services;
 
 namespace Invo.Modules.Invoices.Core.Services
 {
     internal class InvoiceService : IInvoiceService
     {
         private readonly IInvoiceRepository _invoiceRepository;
+        private readonly IGrossNetCalculationService _grossNetCalculationService;
 
-        public InvoiceService(IInvoiceRepository invoiceRepository)
+        public InvoiceService(IInvoiceRepository invoiceRepository, IGrossNetCalculationService grossNetCalculationService)
         {
             _invoiceRepository = invoiceRepository;
+            _grossNetCalculationService = grossNetCalculationService;
         }
         
-        public async Task AddAsync(InvoiceAddUpdateDto dto)
+        public async Task AddAsync(InvoiceAddDto dto)
         {
             var sellerInvoices = await _invoiceRepository.BrowseBySellerAsync(dto.SellerId);
-            if (sellerInvoices.Any(x => x.Number.Equals(dto.Number, StringComparison.OrdinalIgnoreCase)))
+            if (InvoiceAlreadyExist(sellerInvoices, dto.Number))
             {
-                //TODO: change exception type
-                throw new Exception();
+                throw new InvoiceAlreadyExistException(dto.Number);
             }
-            dto.Id = Guid.NewGuid();
-            var invoice = dto.ToInvoice();
+
+            var invoice = CreateInvoice(dto);
+
             await _invoiceRepository.AddAsync(invoice);
         }
         
-        public async Task<InvoiceDetailsUpdateDto> GetAsync(Guid id)
+        public async Task<InvoiceDetailsDto> GetAsync(Guid id)
         {
             var invoice = await _invoiceRepository.GetAsync(id);
             var invoiceDetailsDto = invoice.ToInvoiceDetailsDto();
@@ -54,13 +58,18 @@ namespace Invo.Modules.Invoices.Core.Services
             return invoiceGetDtos.ToList();
         }
 
-        public async Task UpdateAsync(InvoiceAddUpdateDto dto)
+        public async Task UpdateAsync(InvoiceUpdateDto dto)
         {
             var invoice = await _invoiceRepository.GetAsync(dto.Id);
             if (invoice is null)
             {
-                //TODO: change exception type
-                throw new Exception();
+                throw new InvoiceNotFoundException(dto.Id);
+            }
+            
+            var sellerInvoices = await _invoiceRepository.BrowseBySellerAsync(dto.SellerId);
+            if (InvoiceAlreadyExist(sellerInvoices, dto.Number))
+            {
+                throw new InvoiceAlreadyExistException(dto.Number);
             }
 
             invoice.Type = dto.Type;
@@ -69,10 +78,8 @@ namespace Invo.Modules.Invoices.Core.Services
             invoice.SaleDate = dto.SaleDate;
             invoice.SellerId = dto.SellerId;
             invoice.BuyerId = dto.BuyerId;
-            invoice.Items = dto.Items.Select(x => x.ToInvoiceItem(dto.Id));
-            invoice.NetAmount = dto.NetAmount;
-            invoice.GrossAmount = dto.GrossAmount;
-
+            //TODO: implement items update
+            
             await _invoiceRepository.UpdateAsync(invoice);
         }
 
@@ -81,11 +88,50 @@ namespace Invo.Modules.Invoices.Core.Services
             var invoice = await _invoiceRepository.GetAsync(id);
             if (invoice is null)
             {
-                //TODO: change exception type
-                throw new Exception();
+                throw new InvoiceNotFoundException(id);
             }
 
             await _invoiceRepository.DeleteAsync(invoice);
+        }
+
+        private bool InvoiceAlreadyExist(IReadOnlyList<Invoice> invoices, string number)
+        {
+            var exist = invoices.Any(x => x.Number.Equals(number, StringComparison.OrdinalIgnoreCase));
+
+            return exist;
+        }
+
+        private Invoice CreateInvoice(InvoiceAddDto dto)
+        {
+            dto.Id = Guid.NewGuid();
+            Invoice invoice = new()
+            {
+                Id = dto.Id,
+                Type = dto.Type,
+                Number = dto.Number,
+                DateOfIssue = dto.DateOfIssue,
+                SaleDate = dto.SaleDate,
+                SellerId = dto.SellerId,
+                BuyerId = dto.BuyerId,
+                Items = dto.Items.Select(x => new InvoiceItem
+                {
+                    Id = Guid.NewGuid(),
+                    InvoiceId = dto.Id,
+                    Name = x.Name,
+                    Unit = x.Unit,
+                    Amount = x.Amount,
+                    NetPrice = x.NetPrice,
+                    VatRate = x.VatRate,
+                    GrossPrice = _grossNetCalculationService.GetGrossPrice(x.NetPrice, x.VatRate),
+                    NetAmount = _grossNetCalculationService.GetNetAmount(x.NetPrice, x.Amount),
+                    VatAmount = _grossNetCalculationService.GetSummarisedVatAmount(x.NetPrice, x.VatRate, x.Amount),
+                    GrossAmount = _grossNetCalculationService.GetGrossAmount(x.NetPrice, x.VatRate, x.Amount),
+                })
+            };
+            invoice.NetAmount = invoice.Items.Sum((x => x.NetAmount));
+            invoice.GrossAmount = invoice.Items.Sum(x => x.GrossAmount);
+
+            return invoice;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Invo.Modules.Invoices.Api.Controllers
             => Ok(await _invoiceService.BrowseAsync());
 
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<InvoiceDetailsUpdateDto>> Get(Guid id) 
+        public async Task<ActionResult<InvoiceDetailsDto>> Get(Guid id) 
             => OkOrNotFound(await _invoiceService.GetAsync(id));
 
         [HttpGet("seller/{id:guid}")]
@@ -29,7 +29,7 @@ namespace Invo.Modules.Invoices.Api.Controllers
             => Ok(await _invoiceService.BrowseBySellerAsync(id));
 
         [HttpPost]
-        public async Task<ActionResult> AddAsync(InvoiceAddUpdateDto dto)
+        public async Task<ActionResult> AddAsync(InvoiceAddDto dto)
         {
             await _invoiceService.AddAsync(dto);
 
@@ -37,7 +37,7 @@ namespace Invo.Modules.Invoices.Api.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<ActionResult> UpdateAsync(Guid id, InvoiceAddUpdateDto dto)
+        public async Task<ActionResult> UpdateAsync(Guid id, InvoiceUpdateDto dto)
         {
             dto.Id = id;
             await _invoiceService.UpdateAsync(dto);

@@ -2,7 +2,7 @@
 
 namespace Invo.Modules.Invoices.Core.DTO
 {
-    public class InvoiceGetDto
+    internal class InvoiceGetDto
     {
         public Guid Id { get; set; }
         public string Type { get; set; }

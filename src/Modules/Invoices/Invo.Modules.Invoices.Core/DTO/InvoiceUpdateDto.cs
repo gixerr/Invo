@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Invo.Modules.Invoices.Core.DTO
 {
-    public class InvoiceAddUpdateDto
+    internal class InvoiceUpdateDto
     {
+        [Required]
         public Guid Id { get; set; }
         [Required]
         public string Type { get; set; }
@@ -19,12 +19,5 @@ namespace Invo.Modules.Invoices.Core.DTO
         public DateTime DateOfIssue { get; set; }
         [Required]
         public DateTime SaleDate { get; set; }
-        [Required]
-        [MinLength(1, ErrorMessage = "Items cannot be empty.")]
-        public IEnumerable<InvoiceItemDto> Items { get; set; }
-        [Required]
-        public decimal NetAmount { get; set; }
-        [Required]
-        public decimal GrossAmount { get; set; }
     }
 }

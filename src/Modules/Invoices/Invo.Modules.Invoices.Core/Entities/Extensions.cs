@@ -18,6 +18,7 @@ namespace Invo.Modules.Invoices.Core.Entities
                 BuyerId = invoice.BuyerId,
                 Items = invoice.Items.Select(x => x.ToInvoiceItemDto()).ToList(),
                 NetAmount = invoice.NetAmount,
+                VatAmount = invoice.VatAmount,
                 GrossAmount = invoice.GrossAmount
             };
 

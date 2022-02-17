@@ -8,6 +8,7 @@ namespace Invo.Modules.Invoices.Core.DTO
         public DateTime SaleDate { get; set; }
         public Guid SellerId { get; set; }
         public decimal NetAmount { get; set; }
+        public decimal VatAmount { get; set; }
         public IReadOnlyList<InvoiceItemDto> Items { get; set; }
     }
 }

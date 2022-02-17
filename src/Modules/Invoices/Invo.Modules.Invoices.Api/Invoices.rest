@@ -1,5 +1,5 @@
 @url = http://localhost:5000/invoices-module
-@invoiceId = cfe4bc66-f760-42fd-8a20-0f3b83dd088b
+@invoiceId = 9f2c91b0-62e7-44a7-97ee-d810819ddd8a
 
 ### Add invoice
 POST {{url}}/invoices
@@ -7,7 +7,7 @@ Content-Type: application/json
 
 {
     "type": "FV",
-    "number": "2022/2/1",
+    "number": "2022/2/2",
     "buyerId": "ed672616-4b17-4e33-8733-b6d13893f156",
     "sellerId": "584aa75c-9d50-41f9-ac94-890ad2243a44",
     "dateOfIssue": "2022-02-16",
@@ -17,23 +17,17 @@ Content-Type: application/json
             "name": "Test",
             "unit": "Piece",
             "amount": 1,
-            "netAmount": 10,
-            "vatRate": 23,
-            "vatAmount": 0.23,
-            "grossAmount": 1.23
+            "netPrice": 10,
+            "vatRate": 23
         },
         {
             "name": "Test",
             "unit": "Piece",
             "amount": 100,
-            "netAmount": 10,
-            "vatRate": 23,
-            "vatAmount": 2.3,
-            "grossAmount": 123
+            "netPrice": 10,
+            "vatRate": 23
         }
-    ],
-    "netAmount": 100,
-    "grossAmount": 123
+    ]
 }
 
 ### Get invoices
@@ -52,29 +46,7 @@ Content-Type: application/json
     "buyerId": "ed672616-4b17-4e33-8733-b6d13893f156",
     "sellerId": "584aa75c-9d50-41f9-ac94-890ad2243a44",
     "dateOfIssue": "2022-02-16",
-    "saleDate": "2022-02-16",
-    "items": [
-        {
-            "name": "Test2",
-            "unit": "Piece",
-            "amount": 1,
-            "netAmount": 10,
-            "vatRate": 23,
-            "vatAmount": 0.23,
-            "grossAmount": 1.23
-        },
-        {
-            "name": "Test2",
-            "unit": "Piece",
-            "amount": 100,
-            "netAmount": 10,
-            "vatRate": 23,
-            "vatAmount": 2.3,
-            "grossAmount": 123
-        }
-    ],
-    "netAmount": 100,
-    "grossAmount": 123
+    "saleDate": "2022-02-16"
 }
 
 ###Delete invoice

@@ -19,6 +19,7 @@ namespace Invo.Shared.Infrastructure
                 {
                     manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
                 });
+            services.AddSingleton<IGrossNetCalculationService, GrossNetCalculationService>();
             
             return services;
         }

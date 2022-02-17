@@ -1,5 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using Invo.Shared.Infrastructure.Api;
+using Invo.Shared.Infrastructure.Exceptions;
+using Invo.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +13,7 @@ namespace Invo.Shared.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
+            services.AddErrorHandling();
             services.AddControllers()
                 .ConfigureApplicationPartManager(manager =>
                 {
@@ -22,6 +25,7 @@ namespace Invo.Shared.Infrastructure
 
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
         {
+            app.UseErrorHandling();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

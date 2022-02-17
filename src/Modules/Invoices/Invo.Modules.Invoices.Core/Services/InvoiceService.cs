@@ -120,19 +120,22 @@ namespace Invo.Modules.Invoices.Core.Services
                     Name = x.Name,
                     Unit = x.Unit,
                     Amount = x.Amount,
-                    NetPrice = x.NetPrice,
+                    NetPrice = GetRoundedAmount(x.NetPrice),
                     VatRate = x.VatRate,
-                    GrossPrice = Math.Round(_grossNetCalculationService.GetGrossPrice(x.NetPrice, x.VatRate), 2),
-                    NetAmount = Math.Round(_grossNetCalculationService.GetNetAmount(x.NetPrice, x.Amount), 2),
-                    VatAmount = Math.Round(_grossNetCalculationService.GetSummarisedVatAmount(x.NetPrice, x.VatRate, x.Amount), 2),
-                    GrossAmount = Math.Round(_grossNetCalculationService.GetGrossAmount(x.NetPrice, x.VatRate, x.Amount), 2),
+                    GrossPrice = GetRoundedAmount(_grossNetCalculationService.GetGrossPrice(x.NetPrice, x.VatRate)),
+                    NetAmount = GetRoundedAmount(_grossNetCalculationService.GetNetAmount(x.NetPrice, x.Amount)),
+                    VatAmount = GetRoundedAmount(_grossNetCalculationService.GetSummarisedVatAmount(x.NetPrice, x.VatRate, x.Amount)),
+                    GrossAmount = GetRoundedAmount(_grossNetCalculationService.GetGrossAmount(x.NetPrice, x.VatRate, x.Amount)),
                 })
             };
-            invoice.VatAmount = Math.Round(invoice.Items.Sum(x => x.VatAmount), 2);
-            invoice.NetAmount = Math.Round(invoice.Items.Sum(x => x.NetAmount), 2);
-            invoice.GrossAmount = Math.Round(invoice.Items.Sum(x => x.GrossAmount), 2);
+            invoice.VatAmount = GetRoundedAmount(invoice.Items.Sum(x => x.VatAmount));
+            invoice.NetAmount = GetRoundedAmount(invoice.Items.Sum(x => x.NetAmount));
+            invoice.GrossAmount = GetRoundedAmount(invoice.Items.Sum(x => x.GrossAmount));
 
             return invoice;
         }
+
+        private static decimal GetRoundedAmount(decimal amount)
+            => Math.Round(amount, 2);
     }
 }

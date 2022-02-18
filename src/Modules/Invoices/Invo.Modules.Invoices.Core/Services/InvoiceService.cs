@@ -6,7 +6,6 @@ using Invo.Modules.Invoices.Core.DTO;
 using Invo.Modules.Invoices.Core.Entities;
 using Invo.Modules.Invoices.Core.Exceptions;
 using Invo.Modules.Invoices.Core.Repositories;
-using Invo.Shared.Infrastructure.Services;
 
 namespace Invo.Modules.Invoices.Core.Services
 {
@@ -15,7 +14,7 @@ namespace Invo.Modules.Invoices.Core.Services
         private readonly IInvoiceRepository _invoiceRepository;
         private readonly IInvoiceItemsService _invoiceItemsService;
 
-        public InvoiceService(IInvoiceRepository invoiceRepository, IGrossNetCalculationService grossNetCalculationService, IInvoiceItemsService invoiceItemsService)
+        public InvoiceService(IInvoiceRepository invoiceRepository, IInvoiceItemsService invoiceItemsService)
         {
             _invoiceRepository = invoiceRepository;
             _invoiceItemsService = invoiceItemsService;

@@ -124,12 +124,5 @@ namespace Invo.Modules.Invoices.Core.Services
 
         private static decimal GetRoundedAmount(decimal amount)
             => Math.Round(amount, 2);
-
-        private static decimal ToPln(decimal amount, string currency, decimal exchangeRate)
-        {
-            if (currency.Equals("pln", StringComparison.OrdinalIgnoreCase)) return amount;
-
-            return amount * exchangeRate;
-        }
     }
 }

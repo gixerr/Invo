@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Invo.Shared.Abstractions.Currency;
 
 namespace Invo.Modules.Invoices.Core.DTO
 {
@@ -17,7 +18,7 @@ namespace Invo.Modules.Invoices.Core.DTO
         [Required]
         public int VatRate { get; set; }
         [Required]
-        public string Currency { get; set; }
+        public Currency Currency { get; set; }
         [Required]
         public decimal ExchangeRate { get; set; }
     }

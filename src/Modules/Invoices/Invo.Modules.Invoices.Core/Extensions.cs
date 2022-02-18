@@ -12,6 +12,7 @@ namespace Invo.Modules.Invoices.Core
         {
             services.AddSingleton<IInvoiceRepository, InMemoryInvoiceRepository>();
             services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<IInvoiceItemsService, InvoiceItemsService>();
             return services;
         }
     }

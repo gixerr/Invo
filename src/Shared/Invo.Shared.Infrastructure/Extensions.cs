@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using Invo.Shared.Abstractions.Calculations;
 using Invo.Shared.Infrastructure.Api;
 using Invo.Shared.Infrastructure.Exceptions;
 using Invo.Shared.Infrastructure.Services;
@@ -20,6 +21,7 @@ namespace Invo.Shared.Infrastructure
                     manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
                 });
             services.AddSingleton<IGrossNetCalculationService, GrossNetCalculationService>();
+            services.AddSingleton<ICurrencyService, CurrencyService>();
             
             return services;
         }

@@ -13,12 +13,12 @@ namespace Invo.Modules.Invoices.Core.Services
     internal class InvoiceService : IInvoiceService
     {
         private readonly IInvoiceRepository _invoiceRepository;
-        private readonly IGrossNetCalculationService _grossNetCalculationService;
+        private readonly IInvoiceItemsService _invoiceItemsService;
 
-        public InvoiceService(IInvoiceRepository invoiceRepository, IGrossNetCalculationService grossNetCalculationService)
+        public InvoiceService(IInvoiceRepository invoiceRepository, IGrossNetCalculationService grossNetCalculationService, IInvoiceItemsService invoiceItemsService)
         {
             _invoiceRepository = invoiceRepository;
-            _grossNetCalculationService = grossNetCalculationService;
+            _invoiceItemsService = invoiceItemsService;
         }
         
         public async Task AddAsync(InvoiceAddDto dto)
@@ -113,24 +113,11 @@ namespace Invo.Modules.Invoices.Core.Services
                 SaleDate = dto.SaleDate,
                 SellerId = dto.SellerId,
                 BuyerId = dto.BuyerId,
-                Items = dto.Items.Select(x => new InvoiceItem
-                {
-                    Id = Guid.NewGuid(),
-                    InvoiceId = dto.Id,
-                    Name = x.Name,
-                    Unit = x.Unit,
-                    Amount = x.Amount,
-                    NetPrice = GetRoundedAmount(ToPln(x.NetPrice, x.Currency, x.ExchangeRate)),
-                    VatRate = x.VatRate,
-                    GrossPrice = GetRoundedAmount(_grossNetCalculationService.GetGrossPrice(ToPln(x.NetPrice, x.Currency, x.ExchangeRate), x.VatRate)),
-                    NetAmount = GetRoundedAmount(_grossNetCalculationService.GetNetAmount(ToPln(x.NetPrice, x.Currency, x.ExchangeRate), x.Amount)),
-                    VatAmount = GetRoundedAmount(_grossNetCalculationService.GetSummarisedVatAmount(ToPln(x.NetPrice, x.Currency, x.ExchangeRate), x.VatRate, x.Amount)),
-                    GrossAmount = GetRoundedAmount(_grossNetCalculationService.GetGrossAmount(ToPln(x.NetPrice, x.Currency, x.ExchangeRate), x.VatRate, x.Amount)),
-                })
             };
-            invoice.VatAmount = GetRoundedAmount(invoice.Items.Sum(x => x.VatAmount));
+            invoice.Items = _invoiceItemsService.ProcessItems(dto.Items, invoice.Id);
             invoice.NetAmount = GetRoundedAmount(invoice.Items.Sum(x => x.NetAmount));
             invoice.GrossAmount = GetRoundedAmount(invoice.Items.Sum(x => x.GrossAmount));
+            invoice.VatAmount = GetRoundedAmount(invoice.Items.Sum(x => x.VatAmount));
 
             return invoice;
         }

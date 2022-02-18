@@ -1,4 +1,6 @@
-﻿namespace Invo.Shared.Infrastructure.Services
+﻿using System;
+
+namespace Invo.Shared.Infrastructure.Services
 {
     internal class GrossNetCalculationService : IGrossNetCalculationService
     {
@@ -6,16 +8,16 @@
             => netPrice * vatRate / 100;
 
         public decimal GetGrossPrice(decimal netPrice, decimal vatRate)
-            => netPrice + GetVatAmount(netPrice, vatRate);
+            => Math.Round(netPrice + GetVatAmount(netPrice, vatRate), 2);
 
         public decimal GetNetAmount(decimal netPrice, decimal amount)
-            => netPrice * amount;
+            => Math.Round(netPrice * amount, 2);
         
         public decimal GetSummarisedVatAmount(decimal netPrice, decimal vatRate, decimal itemAmount)
-            => GetVatAmount(netPrice, vatRate) * itemAmount;
+            => Math.Round(GetVatAmount(netPrice, vatRate) * itemAmount, 2);
         
         public decimal GetGrossAmount(decimal netPrice, decimal vatRate, decimal itemAmount)
-            => (GetNetAmount(netPrice, itemAmount) + GetSummarisedVatAmount(netPrice, vatRate, itemAmount));
+            => Math.Round(GetNetAmount(netPrice, itemAmount) + GetSummarisedVatAmount(netPrice, vatRate, itemAmount), 2);
 
     }
 }

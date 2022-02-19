@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using Invo.Shared.Abstractions.Calculations;
 using Invo.Shared.Infrastructure.Api;
+using Invo.Shared.Infrastructure.Database;
 using Invo.Shared.Infrastructure.Exceptions;
 using Invo.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
@@ -16,6 +17,7 @@ namespace Invo.Shared.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddErrorHandling();
+            services.AddHostedService<AppInitializer>();
             services.AddControllers()
                 .ConfigureApplicationPartManager(manager =>
                 {

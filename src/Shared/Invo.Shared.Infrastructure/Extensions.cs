@@ -34,12 +34,6 @@ namespace Invo.Shared.Infrastructure
             app.UseErrorHandling();
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapGet("/", context => context.Response.WriteAsync("Invo API"));
-            });
-            
             return app;
         }
 

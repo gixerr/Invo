@@ -2,7 +2,7 @@
 
 namespace Invo.Modules.Invoices.Api.Controllers
 {
-    [Route(BasePath)]
+    [Route(InvoicesModule.BasePath)]
     internal class HomeController : BaseController
     {
         [HttpGet]

@@ -17,7 +17,7 @@ namespace Invo.Shared.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddErrorHandling();
-            services.AddHostedService<AppInitializer>();
+            services.AddHostedService<DatabaseInitializer>();
             services.AddControllers()
                 .ConfigureApplicationPartManager(manager =>
                 {

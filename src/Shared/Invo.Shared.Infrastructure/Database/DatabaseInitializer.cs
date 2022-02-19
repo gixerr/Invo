@@ -9,12 +9,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Invo.Shared.Infrastructure.Database
 {
-    public class AppInitializer : IHostedService
+    public class DatabaseInitializer : IHostedService
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILogger<AppInitializer> _logger;
+        private readonly ILogger<DatabaseInitializer> _logger;
 
-        public AppInitializer(IServiceProvider serviceProvider, ILogger<AppInitializer> logger)
+        public DatabaseInitializer(IServiceProvider serviceProvider, ILogger<DatabaseInitializer> logger)
         {
             _serviceProvider = serviceProvider;
             _logger = logger;

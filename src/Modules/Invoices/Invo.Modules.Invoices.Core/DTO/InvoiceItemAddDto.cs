@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using Invo.Shared.Abstractions.Currency;
 

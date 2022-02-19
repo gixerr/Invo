@@ -1,5 +1,4 @@
-﻿using System;
-using Invo.Shared.Abstractions.Calculations;
+﻿using Invo.Shared.Abstractions.Calculations;
 using Invo.Shared.Abstractions.Currency;
 
 namespace Invo.Shared.Infrastructure.Services

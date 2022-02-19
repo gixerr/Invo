@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Invo.Modules.Invoices.Core.DTO;
 
 namespace Invo.Modules.Invoices.Core.Entities

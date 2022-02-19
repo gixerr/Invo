@@ -20,7 +20,7 @@ namespace Invo.Modules.Invoices.Core.Services
             _currencyService = currencyService;
         }
 
-        public IEnumerable<InvoiceItem> ProcessItems(IEnumerable<InvoiceItemAddDto> dtoItems, Guid invoiceId)
+        public ICollection<InvoiceItem> ProcessItems(IEnumerable<InvoiceItemAddDto> dtoItems, Guid invoiceId)
         {
             var invoiceItems = dtoItems.Select(x => new InvoiceItem
             {
@@ -49,7 +49,7 @@ namespace Invo.Modules.Invoices.Core.Services
                         .ConvertToUserCurrency(x.NetPrice, x.Currency, x.ExchangeRate), x.VatRate, x.Amount)
             });
 
-            return invoiceItems;
+            return invoiceItems.ToList();
         }
     }
 }

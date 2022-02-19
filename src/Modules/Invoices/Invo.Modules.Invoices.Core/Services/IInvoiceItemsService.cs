@@ -7,6 +7,6 @@ namespace Invo.Modules.Invoices.Core.Services
 {
     internal interface IInvoiceItemsService
     {
-        public IEnumerable<InvoiceItem> ProcessItems(IEnumerable<InvoiceItemAddDto> dtoItems, Guid invoiceId);
+        public ICollection<InvoiceItem> ProcessItems(IEnumerable<InvoiceItemAddDto> dtoItems, Guid invoiceId);
     }
 }

@@ -12,7 +12,7 @@ namespace Invo.Modules.Invoices.Core.Entities
         public DateTime SaleDate { get; set; }
         public Guid SellerId { get; set; }
         public Guid BuyerId { get; set; }
-        public IEnumerable<InvoiceItem> Items { get; set; }
+        public ICollection<InvoiceItem> Items { get; set; }
         public decimal VatAmount { get; set; }
         public decimal NetAmount { get; set; }
         public decimal GrossAmount { get; set; }

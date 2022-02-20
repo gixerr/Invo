@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Invo.Bootstrapper
@@ -25,19 +24,14 @@ namespace Invo.Bootstrapper
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructure();
-            foreach (var module in _modules)
-            {
-                module.Register(services);
-            }
+            services.AddModules(_modules);
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             app.UseInfrastructure();
-            foreach (var module in _modules)
-            {
-                module.Use(app);
-            }
+            app.UseModules(_modules);
+            
             logger.LogInformation($"Loaded modules: {string.Join(", ", _modules.Select(x => x.Name))}");
             
             app.UseEndpoints(endpoints =>

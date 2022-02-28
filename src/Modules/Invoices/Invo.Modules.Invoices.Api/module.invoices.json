@@ -1,0 +1,8 @@
+﻿{
+  "invoices": {
+    "module": {
+      "name": "invoices",
+      "enabled": false
+    }
+  }
+}

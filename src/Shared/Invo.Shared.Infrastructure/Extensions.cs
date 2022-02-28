@@ -1,11 +1,16 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using Invo.Shared.Abstractions.Calculations;
+using Invo.Shared.Abstractions.Modules;
 using Invo.Shared.Infrastructure.Api;
 using Invo.Shared.Infrastructure.Database;
 using Invo.Shared.Infrastructure.Exceptions;
 using Invo.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,13 +19,45 @@ namespace Invo.Shared.Infrastructure
 {
     internal static class Extensions
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IList<Assembly> assemblies,
+            IList<IModule> modules)
         {
+            var disabledModules = new List<string>();
+            using (var serviceProvider = services.BuildServiceProvider())
+            {
+                var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+                foreach (var (key,value) in configuration.AsEnumerable())
+                {
+                    if (!key.Contains(":module:enabled"))
+                    {
+                        continue;
+                    }
+
+                    if (!bool.Parse(value))
+                    {
+                        disabledModules.Add(key.Split(":")[0]);
+                    }
+                }
+            }
+            
             services.AddErrorHandling();
             services.AddHostedService<DatabaseInitializer>();
             services.AddControllers()
                 .ConfigureApplicationPartManager(manager =>
                 {
+                    var removedParts = new List<ApplicationPart>();
+                    foreach (var disabledModule in disabledModules)
+                    {
+                        var parts = manager.ApplicationParts.Where(x => x.Name.Contains(disabledModule,
+                            StringComparison.OrdinalIgnoreCase));
+                        removedParts.AddRange(parts);
+                    }
+
+                    foreach (var removedPart in removedParts)
+                    {
+                        manager.ApplicationParts.Remove(removedPart);
+                    }
+                    
                     manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
                 });
             services.AddSingleton<IGrossNetCalculationService, GrossNetCalculationService>();

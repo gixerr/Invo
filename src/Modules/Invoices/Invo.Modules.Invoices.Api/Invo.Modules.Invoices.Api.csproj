@@ -8,4 +8,15 @@
       <ProjectReference Include="..\Invo.Modules.Invoices.Core\Invo.Modules.Invoices.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="module.invoices.json" />
+      <Content Include="module.invoices.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="module.invoices.development.json" />
+      <Content Include="module.invoices.development.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

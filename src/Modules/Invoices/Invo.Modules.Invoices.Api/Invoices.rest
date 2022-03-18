@@ -5,7 +5,7 @@
 @PLN = 2
 
 ### Add invoice
-POST {{url}}/invoices
+POST {{url}}/incomeinvoices
 Content-Type: application/json
 
 {

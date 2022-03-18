@@ -5,7 +5,7 @@ namespace Invo.Modules.Invoices.Core.DAL
 {
     internal class InvoicesDbContext : DbContext
     {
-        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<IncomeInvoice> IncomeInvoices { get; set; }
         public DbSet<InvoiceItem> InvoiceItems { get; set; }
 
         public InvoicesDbContext(DbContextOptions<InvoicesDbContext> options) : base(options)

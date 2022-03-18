@@ -5,7 +5,7 @@ using Invo.Modules.Invoices.Core.DTO;
 
 namespace Invo.Modules.Invoices.Core.Services
 {
-    internal interface IInvoiceService
+    internal interface IIncomeInvoiceService
     {
         Task AddAsync(InvoiceAddDto dto);
         Task<InvoiceDetailsDto> GetAsync(Guid id);

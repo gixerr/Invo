@@ -14,8 +14,8 @@ namespace Invo.Modules.Invoices.Core
         public static IServiceCollection AddCore(this IServiceCollection services)
         {
             services.AddPostgres<InvoicesDbContext>();
-            services.AddScoped<IInvoiceRepository, PostgresInvoiceRepository>();
-            services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<IIncomeInvoiceRepository, PostgresIncomeInvoiceRepository>();
+            services.AddScoped<IIncomeInvoiceService, IncomeInvoiceService>();
             services.AddScoped<IInvoiceItemsService, InvoiceItemsService>();
             return services;
         }

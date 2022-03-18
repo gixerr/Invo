@@ -11,7 +11,7 @@ namespace Invo.Modules.Invoices.Core.DAL.Migrations
                 name: "invoices");
 
             migrationBuilder.CreateTable(
-                name: "Invoices",
+                name: "IncomeInvoices",
                 schema: "invoices",
                 columns: table => new
                 {
@@ -28,7 +28,7 @@ namespace Invo.Modules.Invoices.Core.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Invoices", x => x.Id);
+                    table.PrimaryKey("PK_IncomeInvoices", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -46,25 +46,26 @@ namespace Invo.Modules.Invoices.Core.DAL.Migrations
                     NetAmount = table.Column<decimal>(type: "numeric", nullable: false),
                     VatRate = table.Column<int>(type: "integer", nullable: false),
                     VatAmount = table.Column<decimal>(type: "numeric", nullable: false),
-                    GrossAmount = table.Column<decimal>(type: "numeric", nullable: false)
+                    GrossAmount = table.Column<decimal>(type: "numeric", nullable: false),
+                    IncomeInvoiceId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_InvoiceItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InvoiceItems_Invoices_InvoiceId",
-                        column: x => x.InvoiceId,
+                        name: "FK_InvoiceItems_IncomeInvoices_IncomeInvoiceId",
+                        column: x => x.IncomeInvoiceId,
                         principalSchema: "invoices",
-                        principalTable: "Invoices",
+                        principalTable: "IncomeInvoices",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_InvoiceItems_InvoiceId",
+                name: "IX_InvoiceItems_IncomeInvoiceId",
                 schema: "invoices",
                 table: "InvoiceItems",
-                column: "InvoiceId");
+                column: "IncomeInvoiceId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -74,7 +75,7 @@ namespace Invo.Modules.Invoices.Core.DAL.Migrations
                 schema: "invoices");
 
             migrationBuilder.DropTable(
-                name: "Invoices",
+                name: "IncomeInvoices",
                 schema: "invoices");
         }
     }

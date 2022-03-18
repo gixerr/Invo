@@ -5,31 +5,31 @@ namespace Invo.Modules.Invoices.Core.Entities
 {
     internal static class Extensions
     {
-        public static InvoiceDetailsDto ToInvoiceDetailsDto(this Invoice invoice)
+        public static InvoiceDetailsDto ToInvoiceDetailsDto(this IncomeInvoice incomeInvoice)
             => new()
             {
-                Id = invoice.Id,
-                Type = invoice.Type,
-                Number = invoice.Number,
-                DateOfIssue = invoice.DateOfIssue,
-                SaleDate = invoice.SaleDate,
-                SellerId = invoice.SellerId,
-                BuyerId = invoice.BuyerId,
-                Items = invoice.Items.Select(x => x.ToInvoiceItemDto()).ToList(),
-                NetAmount = invoice.NetAmount,
-                VatAmount = invoice.VatAmount,
-                GrossAmount = invoice.GrossAmount
+                Id = incomeInvoice.Id,
+                Type = incomeInvoice.Type,
+                Number = incomeInvoice.Number,
+                DateOfIssue = incomeInvoice.DateOfIssue,
+                SaleDate = incomeInvoice.SaleDate,
+                SellerId = incomeInvoice.SellerId,
+                BuyerId = incomeInvoice.BuyerId,
+                Items = incomeInvoice.Items.Select(x => x.ToInvoiceItemDto()).ToList(),
+                NetAmount = incomeInvoice.NetAmount,
+                VatAmount = incomeInvoice.VatAmount,
+                GrossAmount = incomeInvoice.GrossAmount
             };
 
-        public static InvoiceGetDto ToInvoiceGetDto(this Invoice invoice)
+        public static InvoiceGetDto ToInvoiceGetDto(this IncomeInvoice incomeInvoice)
             => new()
             {
-                Id = invoice.Id,
-                Type = invoice.Type,
-                Number = invoice.Number,
-                BuyerId = invoice.BuyerId,
-                DateOfIssue = invoice.DateOfIssue,
-                GrossAmount = invoice.GrossAmount
+                Id = incomeInvoice.Id,
+                Type = incomeInvoice.Type,
+                Number = incomeInvoice.Number,
+                BuyerId = incomeInvoice.BuyerId,
+                DateOfIssue = incomeInvoice.DateOfIssue,
+                GrossAmount = incomeInvoice.GrossAmount
             };
 
 

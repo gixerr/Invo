@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Invo.Modules.Invoices.Core.Entities
 {
-    public class Invoice
+    public class IncomeInvoice
     { 
         public Guid Id { get; set; }
         public string Type { get; set; }

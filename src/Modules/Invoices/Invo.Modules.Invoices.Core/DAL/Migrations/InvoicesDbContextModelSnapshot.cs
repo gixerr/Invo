@@ -20,7 +20,7 @@ namespace Invo.Modules.Invoices.Core.DAL.Migrations
                 .HasAnnotation("ProductVersion", "5.0.14")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("Invo.Modules.Invoices.Core.Entities.Invoice", b =>
+            modelBuilder.Entity("Invo.Modules.Invoices.Core.Entities.IncomeInvoice", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -55,7 +55,7 @@ namespace Invo.Modules.Invoices.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Invoices");
+                    b.ToTable("IncomeInvoices");
                 });
 
             modelBuilder.Entity("Invo.Modules.Invoices.Core.Entities.InvoiceItem", b =>
@@ -72,6 +72,9 @@ namespace Invo.Modules.Invoices.Core.DAL.Migrations
 
                     b.Property<decimal>("GrossPrice")
                         .HasColumnType("numeric");
+
+                    b.Property<Guid?>("IncomeInvoiceId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("InvoiceId")
                         .HasColumnType("uuid");
@@ -96,21 +99,19 @@ namespace Invo.Modules.Invoices.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InvoiceId");
+                    b.HasIndex("IncomeInvoiceId");
 
                     b.ToTable("InvoiceItems");
                 });
 
             modelBuilder.Entity("Invo.Modules.Invoices.Core.Entities.InvoiceItem", b =>
                 {
-                    b.HasOne("Invo.Modules.Invoices.Core.Entities.Invoice", null)
+                    b.HasOne("Invo.Modules.Invoices.Core.Entities.IncomeInvoice", null)
                         .WithMany("Items")
-                        .HasForeignKey("InvoiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IncomeInvoiceId");
                 });
 
-            modelBuilder.Entity("Invo.Modules.Invoices.Core.Entities.Invoice", b =>
+            modelBuilder.Entity("Invo.Modules.Invoices.Core.Entities.IncomeInvoice", b =>
                 {
                     b.Navigation("Items");
                 });

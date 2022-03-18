@@ -8,4 +8,8 @@
       <ProjectReference Include="..\..\..\Shared\Invo.Shared.Infrastructure\Invo.Shared.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Repositories\IInvoiceRepository.cs" />
+    </ItemGroup>
+
 </Project>

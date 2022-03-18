@@ -6,40 +6,40 @@ using Invo.Modules.Invoices.Core.Entities;
 
 namespace Invo.Modules.Invoices.Core.Repositories
 {
-    internal class InMemoryInvoiceRepository : IInvoiceRepository
+    internal class InMemoryIncomeInvoiceRepository : IIncomeInvoiceRepository
     {
-        private readonly List<Invoice> _invoices = new();
+        private readonly List<IncomeInvoice> _invoices = new();
 
-        public Task<Invoice> GetAsync(Guid id)
+        public Task<IncomeInvoice> GetAsync(Guid id)
             => Task.FromResult(_invoices.SingleOrDefault(x => x.Id.Equals(id)));
 
-        public async Task<IReadOnlyList<Invoice>> BrowseAsync()
+        public async Task<IReadOnlyList<IncomeInvoice>> BrowseAsync()
         {
             await Task.CompletedTask;
 
             return _invoices;
         }
 
-        public async Task<IReadOnlyList<Invoice>> BrowseBySellerAsync(Guid id)
+        public async Task<IReadOnlyList<IncomeInvoice>> BrowseBySellerAsync(Guid id)
         {
             await Task.CompletedTask;
 
             return _invoices.Where(x => x.SellerId.Equals(id)).ToList();
         }
 
-        public Task AddAsync(Invoice invoice)
+        public Task AddAsync(IncomeInvoice incomeInvoice)
         {
-            _invoices.Add(invoice);
+            _invoices.Add(incomeInvoice);
 
             return Task.CompletedTask;
         }
 
-        public Task UpdateAsync(Invoice invoice)
+        public Task UpdateAsync(IncomeInvoice incomeInvoice)
             => Task.CompletedTask;
 
-        public Task DeleteAsync(Invoice invoice)
+        public Task DeleteAsync(IncomeInvoice incomeInvoice)
         {
-            _invoices.Remove(invoice);
+            _invoices.Remove(incomeInvoice);
 
             return Task.CompletedTask;
         }

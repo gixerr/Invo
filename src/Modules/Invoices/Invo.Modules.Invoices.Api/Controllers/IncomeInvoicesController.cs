@@ -7,31 +7,31 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Invo.Modules.Invoices.Api.Controllers
 {
-    internal class InvoicesController : BaseController
+    internal class IncomeInvoicesController : BaseController
     {
-        private readonly IInvoiceService _invoiceService;
+        private readonly IIncomeInvoiceService _incomeInvoiceService;
 
-        public InvoicesController(IInvoiceService invoiceService)
+        public IncomeInvoicesController(IIncomeInvoiceService incomeInvoiceService)
         {
-            _invoiceService = invoiceService;
+            _incomeInvoiceService = incomeInvoiceService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<InvoiceGetDto>>> BrowseAsync()
-            => Ok(await _invoiceService.BrowseAsync());
+            => Ok(await _incomeInvoiceService.BrowseAsync());
 
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<InvoiceDetailsDto>> Get(Guid id) 
-            => OkOrNotFound(await _invoiceService.GetAsync(id));
+            => OkOrNotFound(await _incomeInvoiceService.GetAsync(id));
 
         [HttpGet("seller/{id:guid}")]
         public async Task<ActionResult<InvoiceGetDto>> GetBySellerIdAsync(Guid id)
-            => Ok(await _invoiceService.BrowseBySellerAsync(id));
+            => Ok(await _incomeInvoiceService.BrowseBySellerAsync(id));
 
         [HttpPost]
         public async Task<ActionResult> AddAsync(InvoiceAddDto dto)
         {
-            await _invoiceService.AddAsync(dto);
+            await _incomeInvoiceService.AddAsync(dto);
 
             return CreatedAtAction(nameof(Get), new { id = dto.Id }, null);
         }
@@ -40,7 +40,7 @@ namespace Invo.Modules.Invoices.Api.Controllers
         public async Task<ActionResult> UpdateAsync(Guid id, InvoiceUpdateDto dto)
         {
             dto.Id = id;
-            await _invoiceService.UpdateAsync(dto);
+            await _incomeInvoiceService.UpdateAsync(dto);
 
             return NoContent();
         }
@@ -48,7 +48,7 @@ namespace Invo.Modules.Invoices.Api.Controllers
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult> DeleteAsync(Guid id)
         {
-            await _invoiceService.DeleteAsync(id);
+            await _incomeInvoiceService.DeleteAsync(id);
 
             return NoContent();
         }

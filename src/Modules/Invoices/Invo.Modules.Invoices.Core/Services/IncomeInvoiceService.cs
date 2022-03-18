@@ -9,20 +9,20 @@ using Invo.Modules.Invoices.Core.Repositories;
 
 namespace Invo.Modules.Invoices.Core.Services
 {
-    internal class InvoiceService : IInvoiceService
+    internal class IncomeInvoiceService : IIncomeInvoiceService
     {
-        private readonly IInvoiceRepository _invoiceRepository;
+        private readonly IIncomeInvoiceRepository _incomeInvoiceRepository;
         private readonly IInvoiceItemsService _invoiceItemsService;
 
-        public InvoiceService(IInvoiceRepository invoiceRepository, IInvoiceItemsService invoiceItemsService)
+        public IncomeInvoiceService(IIncomeInvoiceRepository incomeInvoiceRepository, IInvoiceItemsService invoiceItemsService)
         {
-            _invoiceRepository = invoiceRepository;
+            _incomeInvoiceRepository = incomeInvoiceRepository;
             _invoiceItemsService = invoiceItemsService;
         }
         
         public async Task AddAsync(InvoiceAddDto dto)
         {
-            var sellerInvoices = await _invoiceRepository.BrowseBySellerAsync(dto.SellerId);
+            var sellerInvoices = await _incomeInvoiceRepository.BrowseBySellerAsync(dto.SellerId);
             if (InvoiceAlreadyExist(sellerInvoices, dto.Number))
             {
                 throw new InvoiceAlreadyExistException(dto.Number);
@@ -30,12 +30,12 @@ namespace Invo.Modules.Invoices.Core.Services
 
             var invoice = CreateInvoice(dto);
 
-            await _invoiceRepository.AddAsync(invoice);
+            await _incomeInvoiceRepository.AddAsync(invoice);
         }
         
         public async Task<InvoiceDetailsDto> GetAsync(Guid id)
         {
-            var invoice = await _invoiceRepository.GetAsync(id);
+            var invoice = await _incomeInvoiceRepository.GetAsync(id);
             var invoiceDetailsDto = invoice.ToInvoiceDetailsDto();
 
             return invoiceDetailsDto;
@@ -43,7 +43,7 @@ namespace Invo.Modules.Invoices.Core.Services
 
         public async Task<IReadOnlyList<InvoiceGetDto>> BrowseAsync()
         {
-            var invoices = await _invoiceRepository.BrowseAsync();
+            var invoices = await _incomeInvoiceRepository.BrowseAsync();
             var invoiceGetDtos = invoices.Select(x => x.ToInvoiceGetDto());
 
             return invoiceGetDtos.ToList();
@@ -51,7 +51,7 @@ namespace Invo.Modules.Invoices.Core.Services
 
         public async Task<IReadOnlyList<InvoiceGetDto>> BrowseBySellerAsync(Guid id)
         {
-            var invoices = await _invoiceRepository.BrowseBySellerAsync(id);
+            var invoices = await _incomeInvoiceRepository.BrowseBySellerAsync(id);
             var invoiceGetDtos = invoices.Select(x => x.ToInvoiceGetDto());
 
             return invoiceGetDtos.ToList();
@@ -59,13 +59,13 @@ namespace Invo.Modules.Invoices.Core.Services
 
         public async Task UpdateAsync(InvoiceUpdateDto dto)
         {
-            var invoice = await _invoiceRepository.GetAsync(dto.Id);
+            var invoice = await _incomeInvoiceRepository.GetAsync(dto.Id);
             if (invoice is null)
             {
                 throw new InvoiceNotFoundException(dto.Id);
             }
             
-            var sellerInvoices = await _invoiceRepository.BrowseBySellerAsync(dto.SellerId);
+            var sellerInvoices = await _incomeInvoiceRepository.BrowseBySellerAsync(dto.SellerId);
             if (InvoiceAlreadyExist(sellerInvoices, dto.Number))
             {
                 throw new InvoiceAlreadyExistException(dto.Number);
@@ -79,31 +79,31 @@ namespace Invo.Modules.Invoices.Core.Services
             invoice.BuyerId = dto.BuyerId;
             //TODO: implement items update
             
-            await _invoiceRepository.UpdateAsync(invoice);
+            await _incomeInvoiceRepository.UpdateAsync(invoice);
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            var invoice = await _invoiceRepository.GetAsync(id);
+            var invoice = await _incomeInvoiceRepository.GetAsync(id);
             if (invoice is null)
             {
                 throw new InvoiceNotFoundException(id);
             }
 
-            await _invoiceRepository.DeleteAsync(invoice);
+            await _incomeInvoiceRepository.DeleteAsync(invoice);
         }
 
-        private bool InvoiceAlreadyExist(IReadOnlyList<Invoice> invoices, string number)
+        private bool InvoiceAlreadyExist(IReadOnlyList<IncomeInvoice> invoices, string number)
         {
             var exist = invoices.Any(x => x.Number.Equals(number, StringComparison.OrdinalIgnoreCase));
 
             return exist;
         }
 
-        private Invoice CreateInvoice(InvoiceAddDto dto)
+        private IncomeInvoice CreateInvoice(InvoiceAddDto dto)
         {
             dto.Id = Guid.NewGuid();
-            Invoice invoice = new()
+            IncomeInvoice incomeInvoice = new()
             {
                 Id = dto.Id,
                 Type = dto.Type,
@@ -113,12 +113,12 @@ namespace Invo.Modules.Invoices.Core.Services
                 SellerId = dto.SellerId,
                 BuyerId = dto.BuyerId,
             };
-            invoice.Items = _invoiceItemsService.ProcessItems(dto.Items, invoice.Id);
-            invoice.NetAmount = GetRoundedAmount(invoice.Items.Sum(x => x.NetAmount));
-            invoice.GrossAmount = GetRoundedAmount(invoice.Items.Sum(x => x.GrossAmount));
-            invoice.VatAmount = GetRoundedAmount(invoice.Items.Sum(x => x.VatAmount));
+            incomeInvoice.Items = _invoiceItemsService.ProcessItems(dto.Items, incomeInvoice.Id);
+            incomeInvoice.NetAmount = GetRoundedAmount(incomeInvoice.Items.Sum(x => x.NetAmount));
+            incomeInvoice.GrossAmount = GetRoundedAmount(incomeInvoice.Items.Sum(x => x.GrossAmount));
+            incomeInvoice.VatAmount = GetRoundedAmount(incomeInvoice.Items.Sum(x => x.VatAmount));
 
-            return invoice;
+            return incomeInvoice;
         }
 
         private static decimal GetRoundedAmount(decimal amount)

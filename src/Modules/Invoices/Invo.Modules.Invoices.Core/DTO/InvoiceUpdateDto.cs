@@ -19,5 +19,6 @@ namespace Invo.Modules.Invoices.Core.DTO
         public DateTime DateOfIssue { get; set; }
         [Required]
         public DateTime SaleDate { get; set; }
+        public bool IsCarInvoice { get; set; }
     }
 }

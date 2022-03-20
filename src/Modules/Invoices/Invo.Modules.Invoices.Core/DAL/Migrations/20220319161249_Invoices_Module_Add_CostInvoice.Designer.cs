@@ -3,15 +3,17 @@ using System;
 using Invo.Modules.Invoices.Core.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Invo.Modules.Invoices.Core.DAL.Migrations
 {
     [DbContext(typeof(InvoicesDbContext))]
-    partial class InvoicesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220319161249_Invoices_Module_Add_CostInvoice")]
+    partial class Invoices_Module_Add_CostInvoice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -10,5 +10,6 @@ namespace Invo.Modules.Invoices.Core.DTO
         public decimal NetAmount { get; set; }
         public decimal VatAmount { get; set; }
         public IReadOnlyList<InvoiceItemDto> Items { get; set; }
+        public bool IsCarInvoice { get; set; }
     }
 }

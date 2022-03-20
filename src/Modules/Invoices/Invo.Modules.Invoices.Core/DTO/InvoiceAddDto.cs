@@ -22,5 +22,6 @@ namespace Invo.Modules.Invoices.Core.DTO
         [Required]
         [MinLength(1, ErrorMessage = "Items cannot be empty.")]
         public IEnumerable<InvoiceItemAddDto> Items { get; set; }
+        public bool IsCarInvoice { get; set; }
     }
 }

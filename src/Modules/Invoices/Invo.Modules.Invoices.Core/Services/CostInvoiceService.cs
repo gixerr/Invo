@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml;
 using Invo.Modules.Invoices.Core.DAL.Repositories;
 using Invo.Modules.Invoices.Core.DTO;
 using Invo.Modules.Invoices.Core.Entities;
-using Invo.Modules.Invoices.Core.Exceptions;
 using Invo.Modules.Invoices.Core.Repositories;
 
 namespace Invo.Modules.Invoices.Core.Services

@@ -101,7 +101,8 @@ Content-Type: application/json
     "buyerId": "ed672616-4b17-4e33-8733-b6d13893f156",
     "sellerId": "584aa75c-9d50-41f9-ac94-890ad2243a44",
     "dateOfIssue": "2021-12-16",
-    "saleDate": "2021-12-16"
+    "saleDate": "2021-12-16",
+    "isCarInvoice": false
 }
 
 ### Delete invoice

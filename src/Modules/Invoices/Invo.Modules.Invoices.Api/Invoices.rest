@@ -1,8 +1,12 @@
 @url = http://localhost:5000/invoices-module
-@invoiceId = 1549a735-58b4-4220-99fb-3930f877d3ee
+@incomeInvoiceId = 1549a735-58b4-4220-99fb-3930f877d3ee
+@costInvoiceId = 68fbc340-827c-4ef8-8cd9-f73905d6f63e
 
+### CURRENCY
 @Euro = 1
 @PLN = 2
+
+##### INCOME INVOICES #####
 
 ### Add invoice
 POST {{url}}/incomeinvoices
@@ -30,13 +34,13 @@ Content-Type: application/json
 }
 
 ### Get invoices
-GET {{url}}/invoices
+GET {{url}}/incomeinvoices
 
 ### Get invoice
-GET {{url}}/invoices/{{invoiceId}}
+GET {{url}}/incomeinvoices/{{incomeInvoiceId}}
 
 ### Update invoice
-PUT {{url}}/invoices/{{invoiceId}}
+PUT {{url}}/incomeinvoices/{{incomeInvoiceId}}
 Content-Type: application/json
 
 {
@@ -49,4 +53,58 @@ Content-Type: application/json
 }
 
 ### Delete invoice
-DELETE {{url}}/invoices/{{invoiceId}}
+DELETE {{url}}/incomeinvoices/{{incomeInvoiceId}}
+
+
+
+##### COST INVOICES #####
+
+### Add invoice
+POST {{url}}/costinvoices
+Content-Type: application/json
+
+{
+    "type": "FV",
+    "number": "08/04/2021",
+    "buyerId": "ed672616-4b17-4e33-8733-b6d13893f156",
+    "sellerId": "584aa75c-9d50-41f9-ac94-890ad2243a44",
+    "dateOfIssue": "2021-04-20",
+    "saleDate": "2021-04-20",
+    "isCarInvoice": true,
+   
+    "items": [
+        {
+            "name": "Usługa informatyczna",
+            "unit": "Piece",
+            "amount": 20,
+            "netPrice": 120,
+            "vatRate": 23,
+            "currency": {{PLN}},
+            "exchangeRate": 4.5474
+        }
+    ]
+}
+
+### Get invoices
+GET {{url}}/costinvoices
+
+### Get invoice
+GET {{url}}/costinvoices/{{costInvoiceId}}
+
+### Update invoice
+PUT {{url}}/costinvoices/{{costInvoiceId}}
+Content-Type: application/json
+
+{
+    "type": "FV",
+    "number": "15/12/2021",
+    "buyerId": "ed672616-4b17-4e33-8733-b6d13893f156",
+    "sellerId": "584aa75c-9d50-41f9-ac94-890ad2243a44",
+    "dateOfIssue": "2021-12-16",
+    "saleDate": "2021-12-16"
+}
+
+### Delete invoice
+DELETE {{url}}/costinvoices/{costIinvoiceId}}
+
+

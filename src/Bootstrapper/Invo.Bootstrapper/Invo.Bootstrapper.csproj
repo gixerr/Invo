@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Modules\Invoices\Invo.Modules.Invoices.Api\Invo.Modules.Invoices.Api.csproj" />
+      <ProjectReference Include="..\..\Modules\Settlements\Invo.Modules.Settlements.Api\Invo.Modules.Settlements.Api.csproj" />
       <ProjectReference Include="..\..\Shared\Invo.Shared.Infrastructure\Invo.Shared.Infrastructure.csproj" />
     </ItemGroup>
 

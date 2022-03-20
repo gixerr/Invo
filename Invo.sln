@@ -22,6 +22,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Invoices", "Invoices", "{58
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invo.Modules.Invoices.Core", "src\Modules\Invoices\Invo.Modules.Invoices.Core\Invo.Modules.Invoices.Core.csproj", "{610C8783-7D7A-4CA5-A3A2-A722455FECEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invo.Modules.Settlements.Domain", "src\Modules\Settlements\Invo.Modules.Settlements.Domain\Invo.Modules.Settlements.Domain.csproj", "{4F703446-0383-405A-AF69-BD10902CE0E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settlements", "Settlements", "{09B3C844-4AFD-47D0-8E3C-32A9E8679BAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invo.Modules.Settlements.Infrastructure", "src\Modules\Settlements\Invo.Modules.Settlements.Infrastructure\Invo.Modules.Settlements.Infrastructure.csproj", "{096CE6C8-C106-4857-B718-EDB713DAB66E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invo.Modules.Settlements.Application", "src\Modules\Settlements\Invo.Modules.Settlements.Application\Invo.Modules.Settlements.Application.csproj", "{91DA839A-E9DD-48C9-8D83-201C837E0AAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invo.Modules.Settlements.Api", "src\Modules\Settlements\Invo.Modules.Settlements.Api\Invo.Modules.Settlements.Api.csproj", "{03026F91-A499-4AA7-A5EF-AE5E5A23A298}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +58,22 @@ Global
 		{610C8783-7D7A-4CA5-A3A2-A722455FECEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{610C8783-7D7A-4CA5-A3A2-A722455FECEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{610C8783-7D7A-4CA5-A3A2-A722455FECEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F703446-0383-405A-AF69-BD10902CE0E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F703446-0383-405A-AF69-BD10902CE0E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F703446-0383-405A-AF69-BD10902CE0E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F703446-0383-405A-AF69-BD10902CE0E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{096CE6C8-C106-4857-B718-EDB713DAB66E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{096CE6C8-C106-4857-B718-EDB713DAB66E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{096CE6C8-C106-4857-B718-EDB713DAB66E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{096CE6C8-C106-4857-B718-EDB713DAB66E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91DA839A-E9DD-48C9-8D83-201C837E0AAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91DA839A-E9DD-48C9-8D83-201C837E0AAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91DA839A-E9DD-48C9-8D83-201C837E0AAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91DA839A-E9DD-48C9-8D83-201C837E0AAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03026F91-A499-4AA7-A5EF-AE5E5A23A298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03026F91-A499-4AA7-A5EF-AE5E5A23A298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03026F91-A499-4AA7-A5EF-AE5E5A23A298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03026F91-A499-4AA7-A5EF-AE5E5A23A298}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1AE52E32-7FA7-4A1A-862C-CD94884DBDC2} = {F916B098-E6D7-49C3-BEBF-AA44D0615783}
@@ -59,5 +85,10 @@ Global
 		{585997E2-4514-4F43-B24D-8FD4E5CB920C} = {B7803983-66E9-43E5-88D1-9700DF6403DE}
 		{E34D91E9-E47E-41D9-B133-4879C39A3FF8} = {585997E2-4514-4F43-B24D-8FD4E5CB920C}
 		{610C8783-7D7A-4CA5-A3A2-A722455FECEE} = {585997E2-4514-4F43-B24D-8FD4E5CB920C}
+		{09B3C844-4AFD-47D0-8E3C-32A9E8679BAF} = {B7803983-66E9-43E5-88D1-9700DF6403DE}
+		{4F703446-0383-405A-AF69-BD10902CE0E0} = {09B3C844-4AFD-47D0-8E3C-32A9E8679BAF}
+		{096CE6C8-C106-4857-B718-EDB713DAB66E} = {09B3C844-4AFD-47D0-8E3C-32A9E8679BAF}
+		{91DA839A-E9DD-48C9-8D83-201C837E0AAE} = {09B3C844-4AFD-47D0-8E3C-32A9E8679BAF}
+		{03026F91-A499-4AA7-A5EF-AE5E5A23A298} = {09B3C844-4AFD-47D0-8E3C-32A9E8679BAF}
 	EndGlobalSection
 EndGlobal

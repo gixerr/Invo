@@ -9,7 +9,7 @@ namespace Invo.Bootstrapper
     internal static class Extensions
     {
         public static void AddModules(this IServiceCollection services, IList<IModule> modules)
-            => modules.ToList().ForEach(x => x.Add(services));
+            => modules.ToList().ForEach(x => x.Register(services));
 
         public static void UseModules(this IApplicationBuilder app, IList<IModule> modules)
             => modules.ToList().ForEach(x => x.Use(app));

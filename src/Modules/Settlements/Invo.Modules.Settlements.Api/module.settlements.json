@@ -1,0 +1,8 @@
+﻿{
+  "settlements": {
+    "module": {
+      "name": "settlements",
+      "enabled": true
+    }
+  }
+}

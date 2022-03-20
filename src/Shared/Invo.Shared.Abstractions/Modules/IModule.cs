@@ -7,7 +7,7 @@ namespace Invo.Shared.Abstractions.Modules
     {
         string Name { get; }
         string Path { get; }
-        void Add(IServiceCollection services);
+        void Register(IServiceCollection services);
         void Use(IApplicationBuilder app);
 
     }

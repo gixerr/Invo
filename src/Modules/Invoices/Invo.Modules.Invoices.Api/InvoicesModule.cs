@@ -11,7 +11,7 @@ namespace Invo.Modules.Invoices.Api
         public string Name { get; } = "Invoices";
         public string Path => BasePath;
         
-        public void Add(IServiceCollection services)
+        public void Register(IServiceCollection services)
         {
             services.AddCore();
         }

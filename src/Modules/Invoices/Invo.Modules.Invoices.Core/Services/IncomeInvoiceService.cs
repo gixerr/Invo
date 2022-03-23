@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Invo.Modules.Invoices.Core.DAL.Repositories;
 using Invo.Modules.Invoices.Core.DTO;
 using Invo.Modules.Invoices.Core.Entities;
+using Invo.Modules.Invoices.Core.Events;
 using Invo.Modules.Invoices.Core.Repositories;
+using Invo.Shared.Abstractions.Messaging;
 
 namespace Invo.Modules.Invoices.Core.Services
 {
@@ -13,12 +15,14 @@ namespace Invo.Modules.Invoices.Core.Services
     {
         private readonly IIncomeInvoiceRepository _incomeInvoiceRepository;
         private readonly IInvoiceItemsService _invoiceItemsService;
+        private readonly IMessageBroker _messageBroker;
 
         public IncomeInvoiceService(IIncomeInvoiceRepository incomeInvoiceRepository,
-            IInvoiceItemsService invoiceItemsService)
+            IInvoiceItemsService invoiceItemsService, IMessageBroker messageBroker)
         {
             _incomeInvoiceRepository = incomeInvoiceRepository;
             _invoiceItemsService = invoiceItemsService;
+            _messageBroker = messageBroker;
         }
 
         public async Task AddAsync(InvoiceAddDto dto)
@@ -28,6 +32,8 @@ namespace Invo.Modules.Invoices.Core.Services
             var invoice = CreateInvoice(dto);
 
             await _incomeInvoiceRepository.AddAsync(invoice);
+            await _messageBroker.PublishAsync(new IncomeInvoiceAdded(invoice.Id, invoice.Type, invoice.Number,
+                invoice.DateOfIssue, invoice.VatAmount, invoice.NetAmount, invoice.SellerId));
         }
 
         public async Task<InvoiceDetailsDto> GetAsync(Guid id)

@@ -7,6 +7,7 @@ namespace Invo.Modules.Settlements.Domain.Repositories
 {
     public interface IIncomeInvoiceRepository
     {
+        Task<IReadOnlyList<IncomeInvoice>> GetAsync(Guid sellerId);
         Task<IReadOnlyList<IncomeInvoice>> GetAsync(Guid sellerId, int month, int year);
         Task AddAsync(IncomeInvoice incomeInvoice);
         Task UpdateAsync(IncomeInvoice incomeInvoice);

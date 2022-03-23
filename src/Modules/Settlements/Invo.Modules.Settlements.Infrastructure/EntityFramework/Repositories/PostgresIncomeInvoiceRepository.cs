@@ -19,6 +19,9 @@ namespace Invo.Modules.Settlements.Infrastructure.EntityFramework.Repositories
             _incomeInvoices = _dbContext.IncomeInvoices;
         }
 
+        public async Task<IReadOnlyList<IncomeInvoice>> GetAsync(Guid sellerId)
+            => await _incomeInvoices.Where(x => x.SellerId.Equals(sellerId)).ToListAsync();
+
         public async Task<IReadOnlyList<IncomeInvoice>> GetAsync(Guid sellerId, int month, int year)
             => await _incomeInvoices
                 .Where(x =>

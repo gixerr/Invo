@@ -7,7 +7,10 @@ using Invo.Shared.Abstractions.Calculations;
 using Invo.Shared.Abstractions.Modules;
 using Invo.Shared.Infrastructure.Api;
 using Invo.Shared.Infrastructure.Database;
+using Invo.Shared.Infrastructure.Events;
 using Invo.Shared.Infrastructure.Exceptions;
+using Invo.Shared.Infrastructure.Messaging;
+using Invo.Shared.Infrastructure.Modules;
 using Invo.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
@@ -39,8 +42,11 @@ namespace Invo.Shared.Infrastructure
                     }
                 }
             }
-            
+
+            services.AddModuleRequests(assemblies);
             services.AddErrorHandling();
+            services.AddEvents(assemblies);
+            services.AddMessaging();
             services.AddHostedService<DatabaseInitializer>();
             services.AddControllers()
                 .ConfigureApplicationPartManager(manager =>

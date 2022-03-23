@@ -42,11 +42,7 @@ namespace Invo.Shared.Infrastructure.Modules
         {
             var registry = new ModuleRegistry();
             var types = assemblies.SelectMany(x => x.GetTypes()).ToArray();
-            
-            var commandTypes = types
-                .Where(t => t.IsClass && typeof(ICommand).IsAssignableFrom(t))
-                .ToArray();
-            
+
             var eventTypes = types
                 .Where(x => x.IsClass && typeof(IEvent).IsAssignableFrom(x))
                 .ToArray();

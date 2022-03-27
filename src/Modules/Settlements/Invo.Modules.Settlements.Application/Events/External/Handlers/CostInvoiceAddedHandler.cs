@@ -27,7 +27,7 @@ namespace Invo.Modules.Settlements.Application.Events.External.Handlers
                 throw new EventCannotBeNullException(nameof(@event));
             }
             
-            var buyerInvoices = await _costInvoiceRepository.GetAsync(@event.BuyerId);
+            var buyerInvoices = await _costInvoiceRepository.BrowseAsync(@event.BuyerId);
 
             if (buyerInvoices.Any(x => x.Number.Equals(@event.Number)))
             {

@@ -7,8 +7,10 @@ namespace Invo.Modules.Settlements.Domain.Repositories
 {
     public interface ICostInvoiceRepository
     {
-        Task<IReadOnlyList<CostInvoice>> GetAsync(Guid buyerId);
-        Task<IReadOnlyList<CostInvoice>> GetAsync(Guid buyerId, int month, int year);
+        
+        Task<CostInvoice> GetAsync(Guid id);
+        Task<IReadOnlyList<CostInvoice>> BrowseAsync(Guid buyerId);
+        Task<IReadOnlyList<CostInvoice>> BrowseAsync(Guid buyerId, int month, int year);
         Task AddAsync(CostInvoice costInvoice);
         Task UpdateAsync(CostInvoice costInvoice);
         Task DeleteAsync(CostInvoice costInvoice);

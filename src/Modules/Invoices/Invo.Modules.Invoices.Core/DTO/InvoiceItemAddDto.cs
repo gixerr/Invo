@@ -18,7 +18,6 @@ namespace Invo.Modules.Invoices.Core.DTO
         public int VatRate { get; set; }
         [Required]
         public Currency Currency { get; set; }
-        [Required]
-        public decimal ExchangeRate { get; set; }
+        public decimal? ExchangeRate { get; set; }
     }
 }

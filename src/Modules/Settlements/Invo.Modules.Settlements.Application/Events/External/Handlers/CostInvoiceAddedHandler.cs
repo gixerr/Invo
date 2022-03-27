@@ -25,7 +25,7 @@ namespace Invo.Modules.Settlements.Application.Events.External.Handlers
         {
             if (@event is null)
             {
-                throw new ArgumentNullException(nameof(@event), "Event can't be null.");
+                throw new EventCannotBeNullException(nameof(@event));
             }
             
             var buyerInvoices = await _costInvoiceRepository.GetAsync(@event.BuyerId);

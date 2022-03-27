@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Invo.Modules.Settlements.Application.Events.External.Handlers
 {
-    public class IncomeInvoiceAddedHandler : IEventHandler<IncomeInvoiceAdded>
+    internal class IncomeInvoiceAddedHandler : IEventHandler<IncomeInvoiceAdded>
     {
         private readonly IIncomeInvoiceRepository _incomeInvoiceRepository;
         private readonly ILogger<IncomeInvoiceAddedHandler> _logger;

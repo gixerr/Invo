@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Invo.Shared.Abstractions.Events;
 using Invo.Shared.Abstractions.Modules;
 using Microsoft.Extensions.Configuration;

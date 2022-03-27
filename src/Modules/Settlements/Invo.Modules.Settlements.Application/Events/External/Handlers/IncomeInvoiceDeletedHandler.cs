@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Invo.Modules.Settlements.Application.Exceptions;
 using Invo.Modules.Settlements.Domain.Repositories;
 using Invo.Shared.Abstractions.Events;

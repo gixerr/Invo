@@ -8,7 +8,6 @@ using Invo.Modules.Invoices.Core.Entities;
 using Invo.Modules.Invoices.Core.Events;
 using Invo.Modules.Invoices.Core.Repositories;
 using Invo.Shared.Abstractions.Messaging;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Query.ExpressionTranslators.Internal;
 
 namespace Invo.Modules.Invoices.Core.Services
 {

@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 using Invo.Modules.Invoices.Core.DAL.Repositories;
 using Invo.Modules.Invoices.Core.DTO;
 using Invo.Modules.Invoices.Core.Entities;
+using Invo.Modules.Invoices.Core.Events;
 using Invo.Modules.Invoices.Core.Repositories;
+using Invo.Shared.Abstractions.Messaging;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Query.ExpressionTranslators.Internal;
 
 namespace Invo.Modules.Invoices.Core.Services
 {
@@ -13,11 +16,14 @@ namespace Invo.Modules.Invoices.Core.Services
     {
         private readonly ICostInvoiceRepository _costInvoiceRepository;
         private readonly IInvoiceItemsService _invoiceItemsService;
+        private readonly IMessageBroker _messageBroker;
 
-        public CostInvoiceService(ICostInvoiceRepository costInvoiceRepository, IInvoiceItemsService invoiceItemsService)
+        public CostInvoiceService(ICostInvoiceRepository costInvoiceRepository, IInvoiceItemsService invoiceItemsService,
+            IMessageBroker messageBroker)
         {
             _costInvoiceRepository = costInvoiceRepository;
             _invoiceItemsService = invoiceItemsService;
+            _messageBroker = messageBroker;
         }
         
         public async Task AddAsync(InvoiceAddDto dto)
@@ -27,6 +33,8 @@ namespace Invo.Modules.Invoices.Core.Services
             var invoice = CreateCostInvoice(dto);
 
             await _costInvoiceRepository.AddAsync(invoice);
+            await _messageBroker.PublishAsync(new CostInvoiceAdded(invoice.Id, invoice.BuyerId, invoice.IsCarInvoice,
+                invoice.Type, invoice.DateOfIssue, invoice.VatAmount, invoice.NetAmount, invoice.Number));
         }
         
         public async Task<InvoiceDetailsDto> GetAsync(Guid id)

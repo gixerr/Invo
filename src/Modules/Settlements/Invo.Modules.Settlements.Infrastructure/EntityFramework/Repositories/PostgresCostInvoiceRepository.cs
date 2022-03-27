@@ -12,14 +12,17 @@ namespace Invo.Modules.Settlements.Infrastructure.EntityFramework.Repositories
     {
         private readonly SettlementsDbContext _dbContext;
         private readonly DbSet<CostInvoice> _costInvoices;
-
+        
         public PostgresCostInvoiceRepository(SettlementsDbContext dbContext)
         {
             _dbContext = dbContext;
             _costInvoices = dbContext.CostInvoices;
         }
 
-        public async Task<IReadOnlyList<CostInvoice>> Get(Guid buyerId, int month, int year)
+        public async Task<IReadOnlyList<CostInvoice>> GetAsync(Guid buyerId)
+            => await _costInvoices.Where(x => x.BuyerId.Equals(buyerId)).ToListAsync();
+
+        public async Task<IReadOnlyList<CostInvoice>> GetAsync(Guid buyerId, int month, int year)
             => await _costInvoices
                 .Where(x =>
                     x.BuyerId.Equals(buyerId) && x.DateOfIssue.Month.Equals(month) && x.DateOfIssue.Year.Equals(year))

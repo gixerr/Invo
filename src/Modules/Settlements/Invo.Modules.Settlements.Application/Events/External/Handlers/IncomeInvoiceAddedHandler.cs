@@ -25,7 +25,7 @@ namespace Invo.Modules.Settlements.Application.Events.External.Handlers
         {
             if (@event is null)
             {
-                throw new NullReferenceException("Command can't be null.");
+                throw new ArgumentNullException(nameof(@event),"Event can't be null.");
             }
 
             var sellerInvoices = await _incomeInvoiceRepository.GetAsync(@event.SellerId);
@@ -47,7 +47,7 @@ namespace Invo.Modules.Settlements.Application.Events.External.Handlers
             };
 
             await _incomeInvoiceRepository.AddAsync(incomeInvoice);
-            _logger.LogInformation($"Added income invoice to Settlements Module with number: '{incomeInvoice.Number}'");
+            _logger.LogInformation($"Added income invoice with number: '{incomeInvoice.Number}' to settlements module.");
         }
     }
 }

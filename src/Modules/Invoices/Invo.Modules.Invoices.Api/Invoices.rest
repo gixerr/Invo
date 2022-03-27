@@ -106,6 +106,6 @@ Content-Type: application/json
 }
 
 ### Delete invoice
-DELETE {{url}}/costinvoices/{costIinvoiceId}}
+DELETE {{url}}/costinvoices/{{costInvoiceId}}
 
 

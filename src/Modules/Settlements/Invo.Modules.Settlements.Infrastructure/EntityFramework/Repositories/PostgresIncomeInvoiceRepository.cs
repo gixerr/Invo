@@ -19,10 +19,13 @@ namespace Invo.Modules.Settlements.Infrastructure.EntityFramework.Repositories
             _incomeInvoices = _dbContext.IncomeInvoices;
         }
 
-        public async Task<IReadOnlyList<IncomeInvoice>> GetAsync(Guid sellerId)
+        public async Task<IncomeInvoice> GetAsync(Guid id)
+            => _incomeInvoices.SingleOrDefault(x => x.Id.Equals(id));
+
+        public async Task<IReadOnlyList<IncomeInvoice>> BrowseAsync(Guid sellerId)
             => await _incomeInvoices.Where(x => x.SellerId.Equals(sellerId)).ToListAsync();
 
-        public async Task<IReadOnlyList<IncomeInvoice>> GetAsync(Guid sellerId, int month, int year)
+        public async Task<IReadOnlyList<IncomeInvoice>> BrowseAsync(Guid sellerId, int month, int year)
             => await _incomeInvoices
                 .Where(x =>
                     x.SellerId.Equals(sellerId) && x.DateOfIssue.Month.Equals(month) && x.DateOfIssue.Year.Equals(year))

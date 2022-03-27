@@ -84,6 +84,7 @@ namespace Invo.Modules.Invoices.Core.Services
         {
             var invoice = await _costInvoiceRepository.GetInvoiceOrThrowAsync(id);
             await _costInvoiceRepository.DeleteAsync(invoice);
+            await _messageBroker.PublishAsync(new CostInvoiceDeleted(id));
         }
 
         private CostInvoice CreateCostInvoice(InvoiceAddDto dto)

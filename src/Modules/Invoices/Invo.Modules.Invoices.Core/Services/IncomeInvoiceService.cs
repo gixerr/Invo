@@ -84,6 +84,7 @@ namespace Invo.Modules.Invoices.Core.Services
             var invoice = await _incomeInvoiceRepository.GetInvoiceOrThrowAsync(id);
 
             await _incomeInvoiceRepository.DeleteAsync(invoice);
+            await _messageBroker.PublishAsync(new IncomeInvoiceDeleted(id));
         }
 
         private IncomeInvoice CreateInvoice(InvoiceAddDto dto)

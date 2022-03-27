@@ -20,7 +20,7 @@ namespace Invo.Modules.Settlements.Infrastructure.EntityFramework.Repositories
         }
 
         public async Task<IncomeInvoice> GetAsync(Guid id)
-            => _incomeInvoices.SingleOrDefault(x => x.Id.Equals(id));
+            => await _incomeInvoices.SingleOrDefaultAsync(x => x.Id.Equals(id));
 
         public async Task<IReadOnlyList<IncomeInvoice>> BrowseAsync(Guid sellerId)
             => await _incomeInvoices.Where(x => x.SellerId.Equals(sellerId)).ToListAsync();

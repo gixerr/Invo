@@ -2,6 +2,6 @@
 {
     public interface ICurrencyService
     {
-        decimal ConvertToUserCurrency(decimal amount, Currency.Currency itemCurrency, decimal exchangeRate);
+        decimal ConvertToUserCurrency(decimal amount, Currency.Currency itemCurrency, decimal? exchangeRate);
     }
 }

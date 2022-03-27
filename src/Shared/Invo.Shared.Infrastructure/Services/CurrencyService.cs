@@ -1,16 +1,31 @@
-﻿using Invo.Shared.Abstractions.Calculations;
+﻿using System;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using Invo.Shared.Abstractions.Calculations;
 using Invo.Shared.Abstractions.Currency;
+using Invo.Shared.Infrastructure.Exceptions;
 
 namespace Invo.Shared.Infrastructure.Services
 {
-    class CurrencyService : ICurrencyService
+    public class CurrencyService : ICurrencyService
     {
         private Currency UserCurrency => Currency.Pln;
-        public decimal ConvertToUserCurrency(decimal amount, Currency itemCurrency, decimal exchangeRate)
+        public decimal ConvertToUserCurrency(decimal amount, Currency itemCurrency, decimal? exchangeRate)
         {
-            if (itemCurrency.Equals(UserCurrency)) return amount;
+            var availableCurrencies = Enum.GetValues<Currency>();
+            if (!availableCurrencies.Contains(itemCurrency))
+            {
+                throw new InvalidCurrencyException();
+            }
 
-            return amount * exchangeRate;
+            if (itemCurrency.Equals(UserCurrency)) return amount;
+            
+            if (exchangeRate is null)
+            {
+                throw new InvalidExchangeRateException();
+            }
+            
+            return amount * decimal.Parse(exchangeRate.ToString());
         }
     }
 }

@@ -3,8 +3,8 @@
 @costInvoiceId = 68fbc340-827c-4ef8-8cd9-f73905d6f63e
 
 ### CURRENCY
-@Euro = 1
-@PLN = 2
+@EUR = 0
+@PLN = 1
 
 ##### INCOME INVOICES #####
 

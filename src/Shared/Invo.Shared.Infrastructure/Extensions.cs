@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using Invo.Shared.Abstractions.Calculations;
 using Invo.Shared.Abstractions.Modules;
 using Invo.Shared.Infrastructure.Api;
+using Invo.Shared.Infrastructure.Commands;
 using Invo.Shared.Infrastructure.Database;
 using Invo.Shared.Infrastructure.Events;
 using Invo.Shared.Infrastructure.Exceptions;
@@ -45,6 +46,7 @@ namespace Invo.Shared.Infrastructure
 
             services.AddModuleRequests(assemblies);
             services.AddErrorHandling();
+            services.AddCommands(assemblies);
             services.AddEvents(assemblies);
             services.AddMessaging();
             services.AddHostedService<DatabaseInitializer>();

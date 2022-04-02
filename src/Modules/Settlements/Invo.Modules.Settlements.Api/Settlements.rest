@@ -1,0 +1,14 @@
+@url = http://localhost:5000/settlements-module
+
+### HOME
+GET {{url}}
+
+### CREATE MONTH SETTLEMENT
+POST {{url}}/settlements/month/create
+Content-Type: application/json
+
+{
+    "companyId": "584aa75c-9d50-41f9-ac94-890ad2243a44",
+    "month": 12,
+    "year": 2021
+}

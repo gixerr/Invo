@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Invo.Modules.Settlements.Domain.Entities;
-using Invo.Modules.Settlements.Domain.ValueObjects;
+using Invo.Modules.Settlements.Domain.ValueObjects.Costs;
 using Invo.Shared.Abstractions.Calculations;
 
 namespace Invo.Modules.Settlements.Application.Services

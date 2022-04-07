@@ -1,7 +1,7 @@
 ﻿using System;
 using Invo.Shared.Abstractions.Calculations;
 
-namespace Invo.Modules.Settlements.Domain.ValueObjects.Costs
+namespace Invo.Modules.Settlements.Domain.Models.Costs
 {
     public class MixedCycleCarCost : ICost
     {

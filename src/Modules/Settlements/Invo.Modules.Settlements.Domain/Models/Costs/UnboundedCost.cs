@@ -1,6 +1,6 @@
 ﻿using Invo.Shared.Abstractions.Calculations;
 
-namespace Invo.Modules.Settlements.Domain.ValueObjects.Costs
+namespace Invo.Modules.Settlements.Domain.Models.Costs
 {
     public class UnboundedCost : ICost
     {

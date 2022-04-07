@@ -3,15 +3,17 @@ using System;
 using Invo.Modules.Settlements.Infrastructure.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Invo.Modules.Settlements.Infrastructure.EntityFramework.Migrations
 {
     [DbContext(typeof(SettlementsDbContext))]
-    partial class SettlementsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220407202908_Settlement_Module_MonthSettlement")]
+    partial class Settlement_Module_MonthSettlement
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

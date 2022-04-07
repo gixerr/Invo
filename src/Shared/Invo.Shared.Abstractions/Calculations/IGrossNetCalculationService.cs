@@ -1,4 +1,4 @@
-﻿namespace Invo.Shared.Infrastructure.Services
+﻿namespace Invo.Shared.Abstractions.Calculations
 {
     public interface IGrossNetCalculationService
     {

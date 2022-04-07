@@ -12,6 +12,7 @@ namespace Invo.Modules.Settlements.Infrastructure
             => services
                 .AddPostgres<SettlementsDbContext>()
                 .AddScoped<IIncomeInvoiceRepository, PostgresIncomeInvoiceRepository>()
-                .AddScoped<ICostInvoiceRepository, PostgresCostInvoiceRepository>();
+                .AddScoped<ICostInvoiceRepository, PostgresCostInvoiceRepository>()
+                .AddScoped<IMonthSettlementRepository, PostgresMonthSettlementRepository>();
     }
 }

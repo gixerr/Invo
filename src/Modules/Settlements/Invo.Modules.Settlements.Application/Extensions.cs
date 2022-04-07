@@ -1,4 +1,5 @@
-﻿using Invo.Modules.Settlements.Application.Services;
+﻿using Invo.Modules.Settlements.Application.Factories;
+using Invo.Modules.Settlements.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Invo.Modules.Settlements.Application
@@ -6,6 +7,7 @@ namespace Invo.Modules.Settlements.Application
     public static class Extensions
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
-            => services.AddServices();
+            => services.AddServices()
+                       .AddFactories();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Invo.Modules.Settlements.Application.Commands;
 using Invo.Shared.Abstractions.Commands;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace Invo.Modules.Settlements.Api.Controllers
         public async Task<ActionResult> CreateMonthSettlement(CreateMonthSettlement command)
         {
             await _commandDispatcher.SendAsync(command);
-            return Ok();
+            return Created(string.Empty, null);
         }
     }
 }

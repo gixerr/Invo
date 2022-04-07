@@ -7,6 +7,7 @@ namespace Invo.Modules.Settlements.Infrastructure.EntityFramework
     {
         public DbSet<IncomeInvoice> IncomeInvoices { get; set; }
         public DbSet<CostInvoice> CostInvoices { get; set; }
+        public DbSet<MonthSettlement> MonthSettlements { get; set; }
 
         public SettlementsDbContext(DbContextOptions<SettlementsDbContext> options) : base(options)
         {

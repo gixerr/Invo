@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Invo.Modules.Settlements.Application.Commands;
 using Invo.Shared.Abstractions.Commands;
 using Microsoft.AspNetCore.Mvc;

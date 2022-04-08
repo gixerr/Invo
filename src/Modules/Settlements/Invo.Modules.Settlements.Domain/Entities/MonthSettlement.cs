@@ -1,7 +1,5 @@
 ﻿using System;
 using Invo.Modules.Settlements.Domain.Models.Payments;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Invo.Modules.Settlements.Domain.Entities
 {

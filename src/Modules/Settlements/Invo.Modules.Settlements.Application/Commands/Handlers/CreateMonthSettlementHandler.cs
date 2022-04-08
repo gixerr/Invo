@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Invo.Modules.Settlements.Application.Factories;
-using Invo.Modules.Settlements.Domain.Entities;
-using Invo.Modules.Settlements.Domain.Models.Payments;
 using Invo.Modules.Settlements.Domain.Repositories;
 using Invo.Shared.Abstractions.Commands;
 

@@ -4,7 +4,6 @@ using System.Linq;
 using Invo.Modules.Invoices.Core.DTO;
 using Invo.Modules.Invoices.Core.Entities;
 using Invo.Shared.Abstractions.Calculations;
-using Invo.Shared.Infrastructure.Services;
 
 namespace Invo.Modules.Invoices.Core.Services
 {

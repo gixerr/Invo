@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ApplicationModels;
-
-namespace Invo.Shared.Abstractions.Calculations
+﻿namespace Invo.Shared.Abstractions.Calculations
 {
     public interface ICost
     {

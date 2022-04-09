@@ -15,10 +15,11 @@ namespace Invo.Modules.Settlements.Domain.Entities
         public decimal CostsVat { get; private set; }
         public decimal TaxToPay { get; private set; }
         public decimal VatToPay { get; private set; }
+        public decimal SocialSecurity { get; private set; }
         public decimal ToSpent { get; private set; }
 
         public MonthSettlement(MonthIncome monthIncome, MonthIncomeVat monthIncomeVat, MonthCosts monthCosts,
-            MonthCostsVat monthCostsVat, TaxToPay taxToPay, VatToPay vatToPay, ToSpent toSpent, int month, int year, Guid companyId)
+            MonthCostsVat monthCostsVat, TaxToPay taxToPay, VatToPay vatToPay, SocialSecurity socialSecurity, ToSpent toSpent, int month, int year, Guid companyId)
         {
             Id = Guid.NewGuid();
             Month = month;
@@ -31,6 +32,7 @@ namespace Invo.Modules.Settlements.Domain.Entities
             TaxToPay = taxToPay.Value;
             VatToPay = vatToPay.Value;
             ToSpent = toSpent.Value;
+            SocialSecurity = socialSecurity.Value;
         }
 
         private MonthSettlement()

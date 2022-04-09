@@ -7,9 +7,9 @@ namespace Invo.Modules.Settlements.Domain.Models.Payments
     {
         public decimal Value { get; }
 
-        public ToSpent(MonthIncome monthIncome, MonthIncomeVat monthIncomeVat, TaxToPay taxToPay, VatToPay vatToPay)
+        public ToSpent(MonthIncome monthIncome, MonthIncomeVat monthIncomeVat, TaxToPay taxToPay, VatToPay vatToPay, SocialSecurity socialSecurity)
         {
-            Value = Math.Round(monthIncome.Value + monthIncomeVat.Value - taxToPay.Value - vatToPay.Value, 2);
+            Value = Math.Round(monthIncome.Value + monthIncomeVat.Value - taxToPay.Value - vatToPay.Value - socialSecurity.Value, 2);
         }
     }
 }

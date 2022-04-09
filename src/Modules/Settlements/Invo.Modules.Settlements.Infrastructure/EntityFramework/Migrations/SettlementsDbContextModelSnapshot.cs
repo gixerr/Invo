@@ -105,6 +105,9 @@ namespace Invo.Modules.Settlements.Infrastructure.EntityFramework.Migrations
                     b.Property<int>("Month")
                         .HasColumnType("integer");
 
+                    b.Property<decimal>("SocialSecurity")
+                        .HasColumnType("numeric");
+
                     b.Property<decimal>("TaxToPay")
                         .HasColumnType("numeric");
 

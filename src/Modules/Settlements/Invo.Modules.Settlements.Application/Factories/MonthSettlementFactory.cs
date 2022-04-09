@@ -25,9 +25,10 @@ namespace Invo.Modules.Settlements.Application.Factories
             MonthCostsVat monthCostsVat = new(calculatedCosts);
             TaxToPay taxToPay = new(monthIncome, monthCosts);
             VatToPay vatToPay = new(monthIncomeVat, monthCostsVat);
-            ToSpent toSpent = new(monthIncome, monthIncomeVat, taxToPay, vatToPay);
+            SocialSecurity socialSecurity = new(monthIncome, taxToPay);
+            ToSpent toSpent = new(monthIncome, monthIncomeVat, taxToPay, vatToPay, socialSecurity);
 
-            return new MonthSettlement(monthIncome, monthIncomeVat, monthCosts, monthCostsVat, taxToPay, vatToPay,
+            return new MonthSettlement(monthIncome, monthIncomeVat, monthCosts, monthCostsVat, taxToPay, vatToPay, socialSecurity,
                 toSpent, month, year, companyId);
         }
     }
